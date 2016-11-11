@@ -12,7 +12,7 @@ edit = sketch.edit
 grid = sketch.grid
 filter = sketch.filter
 
-libarary = sketch.library
+library = sketch.library
 photo = sketch.photo1
 share = sketch.share
 
@@ -20,11 +20,17 @@ edit_options.visible = false
 grid_options.visible = false
 back.visible = false
     
-back.states.stateUP = 
+back.states.stateUp = 
 	properties: 
 		y: Screen.height - back.height
 	time: .2
 	delay: .1
+
+back.states.stateDown = 
+	properties: 
+		y: Screen.height				
+	time: .2
+	delay: .1	
 	
 grid.on Events.Click, ->
 	grid.opacity = 1
@@ -32,7 +38,7 @@ grid.on Events.Click, ->
 	filter.opacity = 0.35
 
 	back.visible = true
-	back.animate "stateUP"
+	back.animate "stateUp"
 
 	grid_options.animate 
 		properties: 
@@ -40,7 +46,7 @@ grid.on Events.Click, ->
 		time: .2
 		delay: .1
 	
-	libarary.visible = false
+	library.visible = false
 	photo.visible = false
 	share.visible = false
 	grid_options.visible = true
@@ -53,7 +59,7 @@ edit.on Events.Click, ->
 	filter.opacity = 0.35
 	
 	back.visible = true
-	back.animate "stateUP"
+	back.animate "stateUp"
 
 	edit_options.animate 
 		properties: 
@@ -61,7 +67,7 @@ edit.on Events.Click, ->
 		time: .2
 		delay: .1
 
-	libarary.visible = false
+	library.visible = false
 	photo.visible = false
 	share.visible = false
 	edit_options.visible = true
@@ -74,9 +80,9 @@ filter.on Events.Click, ->
 	filter.opacity = 1
 
 	back.visible = true
-	back.animate "stateUP"
+	back.animate "stateUp"
 
-	libarary.visible = false
+	library.visible = false
 	photo.visible = false
 	share.visible = false
 	edit_options.visible = false
@@ -89,19 +95,25 @@ sketch.background.on Events.Click, ->
 	edit.opacity = 1
 	filter.opacity = 1
 
-	back.animate
-		properties: 
-			y: Screen.height				
-		time: .2
-		delay: .1
-		
-	edit_options.animate 
+	back.animate "stateDown"		
+	edit_options.animate
 		properties: 
 			y: Screen.height
 		time: .2
 		delay: .1
 
-	libarary.visible = true
+	grid_options.animate 
+		properties: 
+			y: Screen.height
+		time: .2
+		delay: .1
+
+	library.animate
+		properties:
+			visible: true
+		time: .2
+		delay: .1
+	
 	photo.visible = true
 	share.visible = true
 	
